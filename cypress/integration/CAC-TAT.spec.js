@@ -39,11 +39,13 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.error').should('not.be.visible')
     })
 
+  Cypress._.times(3, function(){
     it('campo telefone continua vazio quando preenchido com valornão-numérico', function(){
         cy.get('#phone')
             .type('abcdefhij')
             .should('have.value', '')
     })
+  })
 
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido', function(){
         cy.clock()
