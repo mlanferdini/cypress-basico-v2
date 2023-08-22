@@ -202,14 +202,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .should('not.be.visible')
       })
 
-      it('preenche a area de texto usando o comando invoke', function () {
+    it('preenche a area de texto usando o comando invoke', function () {
        const longText = Cypress._.repeat('0123456789', 20)
        cy.get('#open-text-area')
         .invoke('val', longText)
         .should('have.value', longText)
-      })
+    })
 
-      it('faz uma requisição HTTP', function () {
+    it('faz uma requisição HTTP', function () {
         cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
             .should(function(response){
                 const { status, statusText, body } = response
@@ -217,7 +217,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
                 expect(statusText).to.equal('OK')
                 expect(body).to.include('CAC TAT')
                 //console.log(response)
-            })    
-       })
+        })    
+    })
+
+    it('encontra o gato escondido', function(){
+        cy.get('#cat')
+            .invoke('show')
+            .should('be.visible')
+        cy.get('#title')
+            .invoke('text', 'CAT TAT')
+        cy.get('#subtitle')
+            .invoke('text', 'Eu 💚 gatos!')
+    })
 
   })
